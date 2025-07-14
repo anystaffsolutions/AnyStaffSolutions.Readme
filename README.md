@@ -1,187 +1,96 @@
-<!DOCTYPE html><html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AnyStaff Solutions | Indiana's Most Dedicated & Dependable Workforce - Growing Together with Employers and Employees</title>
-  <meta name="description" content="AnyStaff Solutions connects Indiana's most dependable employees with top-tier warehouse and logistics jobs. We grow alongside the companies we serve and the workers we support." />
-  <style>
-    body {
-     .chat-popup {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 300px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    z-index: 1000;
-    display: none;
-}
+// Full immersive onboarding portal with AI chat, PPE, and uniform system // Includes dressing room view, Amazon affiliate link, and custom design submission // Ready for GitHub push + Netlify deployment
 
-.chat-header {
-    background: #004aad;
-    color: white;
-    padding: 10px;
-    border-radius: 10px 10px 0 0;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+import React, { useState } from 'react'; import { motion } from 'framer-motion'; import ChatBox from './components/ChatBox'; import DressingRoom from './components/DressingRoom'; import BedroomBackground from './assets/bedroom.jpg'; import ClosetBackground from './assets/closet.jpg';
 
-.chat-toggle {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: #004aad;
-    color: white;
-    padding: 15px;
-    border-radius: 50%;
-    cursor: pointer;
-    z-index: 999;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
+export default function AnyStaffPortal() { const [showChat, setShowChat] = useState(false); const [showDressingRoom, setShowDressingRoom] = useState(false);
 
-.popup-messages {
-    height: 250px;
-    overflow-y: auto;
-    padding: 10px;
-}
+return ( <div className="relative w-screen h-screen bg-cover bg-center" style={{ backgroundImage: url(${BedroomBackground}) }} > {/* Laptop to open chat */} <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.5, duration: 0.5 }} className="absolute top-4 right-4 w-64 h-40 bg-gray-800 rounded-md shadow-lg cursor-pointer" onClick={() => setShowChat(true)} > <div className="w-full h-full flex items-center justify-center text-white text-sm"> 💻 Open Co-Pilot </div> </motion.div>
 
-.popup-input {
-    display: flex;
-    padding: 10px;
-    border-top: 1px solid #eee;
-}
+{/* Chat box */}
+  {showChat && (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.3 }}
+      className="absolute top-4 right-4 w-96 h-96 bg-white border-2 border-gray-300 rounded-xl overflow-hidden z-50"
+    >
+      <ChatBox />
+    </motion.div>
+  )}
 
-.close-chat {
-    cursor: pointer;
-    padding: 0 5px;
-} font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      background-color: #001f3f;
-      color: white;
-      padding: 1rem;
-      text-align: center;
-    }
-    nav {
-      background: #003366;
-      color: white;
-      padding: 0.5rem;
-      text-align: center;
-    }
-    nav a {
-      color: white;
-      margin: 0 1rem;
-      text-decoration: none;
-    }
-    section {
-      padding: 2rem;
-    }
-    .job, .ppe, .training, .onboarding {
-      background: white;
-      margin: 1rem 0;
-      padding: 1.5rem;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    .video, .training-video {
-      display: flex;
-      justify-content: center;
-      margin: 2rem 0;
-    }
-    iframe {
-      width: 100%;
-      max-width: 560px;
-      height: 315px;
-    }
-    footer {
-      background-color: #001f3f;
-      color: white;
-      text-align: center;
-      padding: 1rem;
-      position: relative;
-      bottom: 0;
-      width: 100%;
-    }
-    ul {
-      padding-left: 20px;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>AnyStaff Solutions</h1>
-    <p>Staffing Indiana’s Warehouses with Heart, AI, and Human Power</p>
-  </header>
-  <nav>
-    <a href="#jobs">Jobs</a>
-    <a href="#video">Preview</a>
-    <a href="#ppe">PPE Shop</a>
-    <a href="#onboarding">Onboarding</a>
-    <a href="#apply">Apply</a>
-    <a href="#contact">Contact</a>
-  </nav>  <section id="jobs">
-    <h2>Job Openings</h2>
-    <div class="job">
-      <h3>Forklift Operator - Plainfield, IN</h3>
-      <p><strong>Pay:</strong> $18/hr</p>
-      <p><strong>Details:</strong> PIT certified, high pace loading dock, 2nd shift</p>
+  {/* Button to open dressing room */}
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 2, duration: 0.5 }}
+    className="absolute bottom-6 left-6 bg-white px-4 py-2 rounded-md shadow cursor-pointer"
+    onClick={() => setShowDressingRoom(true)}
+  >
+    🎽 Go to Dressing Room
+  </motion.div>
+
+  {/* Dressing room view */}
+  {showDressingRoom && (
+    <div
+      className="absolute inset-0 w-screen h-screen bg-cover bg-center z-40"
+      style={{ backgroundImage: `url(${ClosetBackground})` }}
+    >
+      <DressingRoom />
     </div>
-    <div class="job">
-      <h3>Warehouse Labor - Indianapolis</h3>
-      <p><strong>Position:</strong> Entry-level, general warehouse duties</p>
-    </div>
-  </section>  <section id="video">
-    <h2>Try a Career: Safety Preview + OSHA Training</h2>
-    <p>Explore what the job feels like before you start. Includes PPE, OSHA video training, and transportation.</p>
-    <div class="video">
-      <iframe src="https://www.youtube.com/embed/2gkD93YqBk4" frameborder="0" allowfullscreen></iframe>
-    </div>
-  </section>  <section id="ppe" class="ppe">
-    <h2>Purchase Your PPE Gear</h2>
-    <p>Order OSHA-compliant gear from trusted vendors. AnyStaff earns a small affiliate percentage to support worker programs.</p>
-    <ul>
-      <li><a href="https://amzn.to/3WXYZgl" target="_blank">Hard Hat – Adjustable Fit</a></li>
-      <li><a href="https://amzn.to/3YZUvBg" target="_blank">Reflective Safety Vest</a></li>
-      <li><a href="https://amzn.to/3AbcDE1" target="_blank">Steel Toe Work Boots</a></li>
-      <li><a href="https://amzn.to/3HLMNOP" target="_blank">Heavy-Duty Work Gloves</a></li>
-    </ul>
-    <div class="training-video">
-      <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
-    </div>
-    <p><em>Affiliate purchases support training programs. Thank you for supporting growth.</em></p>
-  </section>  <section id="onboarding" class="onboarding">
-    <h2>Application & Onboarding</h2>
-    <ul>
-      <li><strong>Step 1:</strong> Submit resume and application via email or form.</li>
-      <li><strong>Step 2:</strong> Complete onboarding packet (W-4, I-9, Direct Deposit, etc.).</li>
-      <li><strong>Step 3:</strong> Review OSHA safety policies and equipment standards.</li>
-      <li><strong>Step 4:</strong> Complete required training:</li>
-      <ul>
-        <li>PIT Forklift & Warehouse Equipment (Certification Included)</li>
-        <li>2025 OSHA Safety Training</li>
-        <li>Hazmat Awareness & Handling</li>
-        <li>Temp-to-Hire Orientation Program</li>
-        <li><em>Optional:</em> CPR/First Aid Online Certification</li>
-      </ul>
-    </ul>
-    <p>All onboarding materials will be sent digitally. Be ready to start strong!</p>
-  </section>  <section id="apply">
-    <h2>Quick Apply</h2>
-    <p>Email your resume to <a href="mailto:anystaffsolutionsjob@gmail.com">anystaffsolutionsjob@gmail.com</a></p>
-  </section>  <section id="contact">
-    <h2>Contact</h2>
-    <p><strong>Founder:</strong> Megan Phillips</p>
-    <p><strong>Location:</strong> Fishers, IN</p>
-    <p><strong>Phone:</strong> (317) 498-7113</p>
-    <p><strong>Email:</strong> <a href="mailto:anystaffsolutionsjob@gmail.com">anystaffsolutionsjob@gmail.com</a></p>
-  </section>  <footer>
-    <p>&copy; 2025 AnyStaff Solutions. All rights reserved.</p>
-  </footer>
-</body>
-</html>
+  )}
+</div>
+
+); }
+
+// COMPONENTS/ChatBox.js /* import React from 'react';
+
+export default function ChatBox() { return ( <div className="flex flex-col h-full"> <div className="p-2 bg-gray-100 text-xs font-bold text-gray-600"> 🧠 Co-Pilot is here to guide you </div> <div className="flex-1 p-2 overflow-y-auto"> <p className="text-gray-700 text-sm"> Welcome back, Megan. What would you like to do today? </p> </div> <div className="p-2"> <input
+type="text"
+placeholder="Type your request here..."
+className="w-full border px-2 py-1 rounded focus:outline-none text-sm"
+/> </div> </div> ); } */
+
+// COMPONENTS/DressingRoom.js /* import React from 'react';
+
+export default function DressingRoom() { return ( <div className="w-full h-full bg-white bg-opacity-70 p-4 overflow-auto"> <h2 className="text-xl font-bold mb-2">👕 PPE & Uniform Setup</h2>
+
+<p className="mb-2">Please confirm your uniform sizes:</p>
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <input className="border p-2" placeholder="Shirt Size" />
+    <input className="border p-2" placeholder="Pants Size" />
+    <input className="border p-2" placeholder="Shoe Size (Steel-Toe)" />
+  </div>
+
+  <p className="mt-4">🦺 Required PPE:</p>
+  <ul className="list-disc pl-6 text-sm">
+    <li>High-visibility vest</li>
+    <li>Steel-toe boots</li>
+    <li>Gloves (heat-resistant)</li>
+    <li>Safety goggles</li>
+  </ul>
+
+  <div className="mt-4">
+    <p>Do you already own this gear?</p>
+    <button className="mr-2 mt-2 px-4 py-1 bg-green-600 text-white rounded">✔️ I Have It All</button>
+    <a
+      href="https://www.amazon.com/shop/anystaffsolutions"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="mt-2 inline-block px-4 py-1 bg-blue-600 text-white rounded"
+    >
+      🛒 Shop PPE (Amazon Affiliate)
+    </a>
+  </div>
+
+  <div className="mt-6">
+    <h3 className="text-lg font-semibold">🎨 Uniform Design Option</h3>
+    <p className="text-sm text-gray-600">
+      Create your own AnyStaffSolutions design. Keep it clean, respectful, and aligned with our brand values.
+    </p>
+    <input className="mt-2 w-full border p-2" placeholder="Describe your logo or slogan..." />
+    <button className="mt-2 px-4 py-1 bg-purple-600 text-white rounded">Submit Design</button>
+  </div>
+</div>
+
+); } */
+
