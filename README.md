@@ -6,7 +6,58 @@
   <meta name="description" content="AnyStaff Solutions connects Indiana's most dependable employees with top-tier warehouse and logistics jobs. We grow alongside the companies we serve and the workers we support." />
   <style>
     body {
-      font-family: Arial, sans-serif;
+     .chat-popup {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    z-index: 1000;
+    display: none;
+}
+
+.chat-header {
+    background: #004aad;
+    color: white;
+    padding: 10px;
+    border-radius: 10px 10px 0 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #004aad;
+    color: white;
+    padding: 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 999;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.popup-messages {
+    height: 250px;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.popup-input {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #eee;
+}
+
+.close-chat {
+    cursor: pointer;
+    padding: 0 5px;
+} font-family: Arial, sans-serif;
       background-color: #f4f4f4;
       margin: 0;
       padding: 0;
