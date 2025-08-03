@@ -1,48 +1,235 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Any Staff Solutions</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Anystaff Solutions Dashboard</title>
+
   <style>
     body {
-      background-color: #222;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      font-family: Arial, sans-serif;
       margin: 0;
+      padding: 0;
+      background: #f4f4f4;
     }
 
-    h1 {
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      font-size: 17vh;
+    #chatbot-box {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 350px;
+      height: 500px;
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      z-index: 9999;
+      display: none;
+      flex-direction: column;
+    }
+
+    #chatbot-header {
+      background: #000066;
+      color: white;
+      padding: 15px;
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
       font-weight: bold;
-      display: flex;
-      gap: 0.5rem;
     }
 
-    .any {
-      color: #fff9b0;
+    #chatbot-body {
+      flex: 1;
+      padding: 15px;
+      overflow-y: auto;
     }
 
-    .staff {
-      background: linear-gradient(to right, #fff9b0, #b0e0ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    #chatbot-footer {
+      padding: 10px;
+      border-top: 1px solid #ccc;
     }
 
-    .solutions {
-      background: linear-gradient(to right, #b0e0ff, #dab0ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    #chatbot-input {
+      width: 100%;
+      padding: 8px;
+    }
+
+    #game-area {
+      background: #f1f1f1;
+      border: 1px solid #ccc;
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    #training-section {
+      padding: 20px;
+    }
+
+    .btn {
+      background-color: #000066;
+      color: white;
+      border: none;
+      padding: 10px 14px;
+      margin-top: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    #quiz-section {
+      margin-top: 20px;
+    }
+
+    #quiz-section h3 {
+      margin-bottom: 10px;
+    }
+
+    #quizResult {
+      margin-top: 10px;
+      font-weight: bold;
     }
   </style>
 </head>
+
 <body>
-  <h1>
-    <span class="any">Any</span>
-    <span class="staff">Staff</span>
-    <span class="solutions">Solutions</span>
-  </h1>
+
+  <!-- Chatbot -->
+  <div id="chatbot-box">
+    <div id="chatbot-header">🤖 Anystaff AI Assistant</div>
+    <div id="chatbot-body">
+      <p><strong>Welcome to Anystaffsolutions.</strong><br><br>
+        WE ARE the elite of next level AI Staffing. We are more than just a temp agency, there's no other staffing agencies out there that are like us and there never will be because <strong>WE TAKE PRIDE IN OUR EMPLOYEES</strong>. Together we are unbeatable, unstoppable, and irresistible.<br><br>
+        Sign up today and tomorrow become part of something you deserve. We promise to help each of you find your work strengths and grow within our team.</p>
+
+      <!-- Mini-game -->
+      <div id="game-area">
+        <p><strong>Mini-Game: Click the Button</strong></p>
+        <button class="btn" onclick="playGame()">🎮 Click Me!</button>
+        <p id="game-result"></p>
+      </div>
+    </div>
+    <div id="chatbot-footer">
+      <input type="text" id="chatbot-input" placeholder="Type your question..." />
+    </div>
+  </div>
+
+  <!-- Training Video + Quiz -->
+  <div id="training-section">
+    <h2>🛡️ Required PPE Training</h2>
+    <video id="trainingVideo" width="100%" controls onended="showQuiz()">
+      <source src="your-training-video.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+
+    <div id="quiz-section" style="display:none;">
+      <h3>Quiz: Test Your Knowledge</h3>
+      <form id="quizForm">
+        <p>1. What does PPE stand for?</p>
+        <label><input type="radio" name="q1" value="a" required> Personal Protective Equipment</label><br>
+        <label><input type="radio" name="q1" value="b"> Professional Protective Enterprise</label><br>
+
+        <p>2. What’s the first thing you should do before using PPE?</p>
+        <label><input type="radio" name="q2" value="a" required> Check for damage or wear</label><br>
+        <label><input type="radio" name="q2" value="b"> Throw it on quickly</label><br>
+
+        <p>3. Which of these is PPE?</p>
+        <label><input type="radio" name="q3" value="a" required> Gloves</label><br>
+        <label><input type="radio" name="q3" value="b"> Coffee Mug</label><br>
+
+        <p>4. Why is eye protection important?</p>
+        <label><input type="radio" name="q4" value="a" required> To avoid dust and debris injuries</label><br>
+        <label><input type="radio" name="q4" value="b"> Just in case it looks cool</label><br>
+
+        <p>5. When should you replace PPE?</p>
+        <label><input type="radio" name="q5" value="a" required> When it’s damaged or expired</label><br>
+        <label><input type="radio" name="q5" value="b"> Only when you want to</label><br>
+
+        <p>6. What does a hard hat protect?</p>
+        <label><input type="radio" name="q6" value="a" required> Your head</label><br>
+        <label><input type="radio" name="q6" value="b"> Your knees</label><br>
+
+        <p>7. PPE should be...</p>
+        <label><input type="radio" name="q7" value="a" required> Properly fitted</label><br>
+        <label><input type="radio" name="q7" value="b"> Borrowed from a friend</label><br>
+
+        <p>8. Respirators help protect from...</p>
+        <label><input type="radio" name="q8" value="a" required> Harmful airborne particles</label><br>
+        <label><input type="radio" name="q8" value="b"> Allergies only</label><br>
+
+        <p>9. PPE should be...</p>
+        <label><input type="radio" name="q9" value="a" required> Worn as directed every time</label><br>
+        <label><input type="radio" name="q9" value="b"> Optional depending on mood</label><br>
+
+        <p>10. Anystaff provides PPE because...</p>
+        <label><input type="radio" name="q10" value="a" required> Your safety is our priority</label><br>
+        <label><input type="radio" name="q10" value="b"> It’s a fashion statement</label><br>
+
+        <button type="submit" class="btn">Submit Quiz</button>
+      </form>
+
+      <p id="quizResult"></p>
+      <button class="btn" id="redeemBtn" style="display:none;" onclick="redeemPPE()">🎁 Redeem PPE Gift</button>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    // Show chatbot when page loads
+    window.addEventListener('load', function () {
+      const isLoggedIn = true; // Replace with real login logic
+      if (isLoggedIn) {
+        document.getElementById("chatbot-box").style.display = "flex";
+      }
+    });
+
+    // Mini-game
+    function playGame() {
+      const result = document.getElementById("game-result");
+      const win = Math.random() > 0.5;
+      result.textContent = win ? "🎉 You won a badge!" : "😅 Try again!";
+    }
+
+    // Show quiz after video
+    function showQuiz() {
+      document.getElementById("quiz-section").style.display = "block";
+    }
+
+    // Quiz logic
+    document.getElementById("quizForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const correctAnswers = {
+        q1: 'a', q2: 'a', q3: 'a', q4: 'a', q5: 'a',
+        q6: 'a', q7: 'a', q8: 'a', q9: 'a', q10: 'a'
+      };
+
+      let score = 0;
+      for (let q in correctAnswers) {
+        const answer = document.querySelector(`input[name="${q}"]:checked`);
+        if (answer && answer.value === correctAnswers[q]) {
+          score++;
+        }
+      }
+
+      const resultText = document.getElementById("quizResult");
+      const redeemBtn = document.getElementById("redeemBtn");
+
+      if (score === 10) {
+        resultText.textContent = "✅ 100%! You’re entered into the PPE sweepstakes!";
+        redeemBtn.style.display = "inline-block";
+      } else {
+        resultText.textContent = `❌ You got ${score}/10. Watch the video again and try for 100%.`;
+        redeemBtn.style.display = "none";
+      }
+    });
+
+    // Redeem via Amazon affiliate
+    function redeemPPE() {
+      const affiliateLink = "https://www.amazon.com/s?k=ppe&tag=anystaffsolutions-20";
+      window.open(affiliateLink, "_blank");
+
+      // Optional: log user entry in sweepstakes backend
+      console.log("User entered sweepstakes and routed through affiliate.");
+    }
+  </script>
 </body>
 </html>
